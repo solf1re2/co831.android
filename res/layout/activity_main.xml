@@ -75,6 +75,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="14dp"
         android:text="@string/calc_button"
-        android:onClick="onClick" />
+        android:onClick="onClickCalc" />
 
 </RelativeLayout>

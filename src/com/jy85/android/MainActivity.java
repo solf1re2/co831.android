@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -15,7 +14,6 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 	private SeekBar bar;
 	private TextView textPercentage, tipValue;
 	private EditText billValue;
-	private Button calcButton;
 
 	private int tipPercentage;
 
@@ -28,14 +26,20 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 		billValue = (EditText) findViewById(R.id.billValue);
 		textPercentage = (TextView) findViewById(R.id.textViewPercentage);
 		tipValue = (TextView) findViewById(R.id.textViewTipValue);
-		calcButton = (Button) findViewById(R.id.calculateButton);
-		calcButton.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				tipValue.setText(calcTip());
-			}
-		});
+	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle b) {
+		b.putInt("percentage", Integer.valueOf(textPercentage.toString()));
+		super.onSaveInstanceState(b);
+	}
+	
+	protected void onRestoreInstanceState(Bundle b) {
+		super.onRestoreInstanceState(b);
+	}
+	
+	public void onClickCalc(View v) {
+		tipValue.setText(calcTip());
 	}
 
 	@Override
