@@ -15,7 +15,8 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 	private TextView textPercentage, tipValue;
 	private EditText billValue;
 
-	private int tipPercentage;
+	private int tipPercentage = 0;
+	private int tipAmount;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +39,18 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 		super.onRestoreInstanceState(b);
 	}
 	
-	public void onClickCalc(View v) {
-		tipValue.setText(calcTip());
+	/**
+	 * Calculates the tip value based on the bill cost entered and percentage
+	 * selected.
+	 */
+	public void onClickBtn(View v) {
+		switch (v.getId()){
+		case R.id.calculateButton:
+			String bill = billValue.getText().toString();
+			tipAmount = (Integer.parseInt(bill)*tipPercentage)/100;
+			tipValue.setText(tipAmount);
+		}
+		
 	}
 
 	@Override
@@ -50,19 +61,10 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 	}
 
 	@Override
-	public void onProgressChanged(SeekBar seekBar, int percentage,
+	public void onProgressChanged(SeekBar seekBar, int progress,
 			boolean fromUser) {
-		textPercentage.setText(percentage + "%");
-		tipPercentage = percentage;
-	}
-
-	/**
-	 * Calculates the tip value based on the bill cost entered and percentage
-	 * selected.
-	 */
-	private int calcTip() {
-		int bill = Integer.valueOf(billValue.getText().toString());
-		return tipPercentage / 100 * bill;
+		textPercentage.setText(progress + "%");
+		tipPercentage = progress;
 	}
 
 	@Override
