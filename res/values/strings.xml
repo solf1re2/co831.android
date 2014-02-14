@@ -6,5 +6,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="bill_request">Please enter the value below:</string>
     <string name="title">TipSter</string>
+    <string name="view_percentage">The selected percentage shows here</string>
+    <string name="tip_amount">Tip Amount</string>
+    <string name="calc_button">Calculate Tip</string>
 
 </resources>
