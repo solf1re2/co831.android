@@ -6,13 +6,13 @@
     <string name="hello_world">Hello world!</string>
     <string name="title">TipSter</string>
     <string name="view_percentage">0%</string>
-    <string name="tip_amount">0</string>
+    <string name="tip_amount">£0</string>
     <string name="calc_button">Calculate Tip</string>
     <string name="add">+</string>
     <string name="sub">-</string>
     <string name="defaultPeople">1</string>
     <string name="billRequest">Bill Value:</string>
     <string name="costEach">Cost per person:</string>
-    <string name="defaultCostEach">£0</string>
+    <string name="defaultCost">£0</string>
 
 </resources>

@@ -15,24 +15,36 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 	private TextView textPercentage, tipValue;
 	private EditText billValue;
 	private TextView displayPeople;
+	private TextView totalCostView;
+	private TextView costPerPerson;
+	
 
-	private int tipPercentage = 0;
+	private int tipPercentage;
 	private int tipAmount;
-	private int billAmount = 0;
+	private int billAmount;
+	private int totalCost;
 	private int people;
+	private int costPP;
 	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		people = 0;
+		people = 1;
+		billAmount = 0;
+		tipPercentage = 0;
+		tipAmount = 0;
+		totalCost = 0;
+		costPP = 0;
 		bar = (SeekBar) findViewById(R.id.seekBar1);
 		bar.setOnSeekBarChangeListener(this);
 		billValue = (EditText) findViewById(R.id.billValue);
 		textPercentage = (TextView) findViewById(R.id.textViewPercentage);
 		tipValue = (TextView) findViewById(R.id.textViewTipValue);
 		displayPeople = (TextView) findViewById(R.id.peopleDisplay);
+		totalCostView = (TextView) findViewById(R.id.totalCostV);
+ 		costPerPerson = (TextView) findViewById(R.id.costPerPerson);
 	}
 	
 	@Override
@@ -45,6 +57,25 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 		super.onRestoreInstanceState(b);
 	}
 	
+	private void setAllViews() {
+		//TODO set all TextView's, then call from all modifiers
+		tipValue.setText("£" + tipAmount);
+		displayPeople.setText(people+"");
+		totalCostView.setText("£" + totalCost);
+		costPerPerson.setText("£" + costPP);
+	}
+	
+	private void calcTipAmount() {
+		tipAmount = billAmount*tipPercentage/100;
+	}
+	
+	private void calcTotalCost() {
+		totalCost = billAmount + tipAmount;
+	}
+	
+	private void calcCostPerPerson() {
+		costPP = totalCost / people;
+	}
 	/**
 	 * Calculates the tip value based on the bill cost entered and percentage
 	 * selected.
@@ -52,14 +83,17 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 	public void onClickBtn(View v) {
 		switch (v.getId()){
 		case R.id.bAdd:
-			
 			people ++;
-			displayPeople.setText(people+"");
+			calcTotalCost();
+			calcCostPerPerson();
+			setAllViews();
 			break;
 		case R.id.bSub:
-			if (people>2){
+			if (people>=2){
 			people --;
-			displayPeople.setText(people+"");
+			calcTotalCost();
+			calcCostPerPerson();
+			setAllViews();
 			} 
 			break;
 		}
@@ -78,8 +112,11 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 		textPercentage.setText(progress + "%");
 		tipPercentage = progress;
 		billAmount = Integer.valueOf(billValue.getText().toString());
-		tipAmount = billAmount*tipPercentage/100;
-		tipValue.setText("£" + tipAmount);
+		calcTipAmount();
+		calcTotalCost();
+		calcCostPerPerson();
+		setAllViews();
+		
 	}
 
 	@Override
