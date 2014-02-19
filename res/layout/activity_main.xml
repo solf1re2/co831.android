@@ -28,12 +28,46 @@
         android:text="@string/view_percentage"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <SeekBar
-        android:id="@+id/seekBar1"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textViewTipValue"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:text="@string/tip_amount"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/peopleDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewTipValue"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:text="@string/defaultPeople"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/bAdd"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/peopleDisplay"
+        android:layout_alignBottom="@+id/peopleDisplay"
+        android:layout_toRightOf="@+id/Title"
+        android:text="@string/add" 
+    	android:onClick="onClickBtn" />
+
+    <Button
+        android:id="@+id/bSub"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/peopleDisplay"
+        android:layout_alignBottom="@+id/peopleDisplay"
+        android:layout_toLeftOf="@+id/Title"
+        android:text="@string/sub" 
+    	android:onClick="onClickBtn" />
 
     <EditText
         android:id="@+id/billValue"
@@ -41,40 +75,38 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/textViewPercentage"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="51dp"
         android:ems="10"
         android:inputType="number" >
 
         <requestFocus />
     </EditText>
 
-    <TextView
-        android:id="@+id/bill_request"
-        android:layout_width="wrap_content"
+    <SeekBar
+        android:id="@+id/seekBar1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/Title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/bill_request" />
+        android:layout_marginTop="60dp" />
 
     <TextView
-        android:id="@+id/textViewTipValue"
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/bAdd"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="42dp"
-        android:text="@string/tip_amount"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginTop="38dp"
+        android:text="@string/costEach"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/calculateButton"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textViewTipValue"
+        android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="14dp"
-        android:text="@string/calc_button"
-        android:onClick="onClickBtn" />
+        android:layout_marginTop="16dp"
+        android:text="@string/defaultCostEach"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

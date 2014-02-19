@@ -14,19 +14,25 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 	private SeekBar bar;
 	private TextView textPercentage, tipValue;
 	private EditText billValue;
+	private TextView displayPeople;
 
 	private int tipPercentage = 0;
 	private int tipAmount;
+	private int billAmount = 0;
+	private int people;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		people = 0;
 		bar = (SeekBar) findViewById(R.id.seekBar1);
 		bar.setOnSeekBarChangeListener(this);
 		billValue = (EditText) findViewById(R.id.billValue);
 		textPercentage = (TextView) findViewById(R.id.textViewPercentage);
 		tipValue = (TextView) findViewById(R.id.textViewTipValue);
+		displayPeople = (TextView) findViewById(R.id.peopleDisplay);
 	}
 	
 	@Override
@@ -45,13 +51,19 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 	 */
 	public void onClickBtn(View v) {
 		switch (v.getId()){
-		case R.id.calculateButton:
-			String bill = billValue.getText().toString();
-			tipAmount = (Integer.parseInt(bill)*tipPercentage)/100;
-			tipValue.setText(tipAmount);
+		case R.id.bAdd:
+			
+			people ++;
+			displayPeople.setText(people+"");
+			break;
+		case R.id.bSub:
+			if (people>2){
+			people --;
+			displayPeople.setText(people+"");
+			} 
+			break;
 		}
-		
-	}
+	}//TODO on change of people/percentage/billValue; update the costPerPerson.
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -65,6 +77,9 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 			boolean fromUser) {
 		textPercentage.setText(progress + "%");
 		tipPercentage = progress;
+		billAmount = Integer.valueOf(billValue.getText().toString());
+		tipAmount = billAmount*tipPercentage/100;
+		tipValue.setText("£" + tipAmount);
 	}
 
 	@Override
