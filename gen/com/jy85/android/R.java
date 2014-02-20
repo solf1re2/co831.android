@@ -50,8 +50,9 @@ public final class R {
         public static final int billRequest=0x7f05000a;
         public static final int calc_button=0x7f050006;
         public static final int costEach=0x7f05000b;
-        public static final int defaultCost=0x7f05000c;
+        public static final int defaultCostEach=0x7f05000d;
         public static final int defaultPeople=0x7f050009;
+        public static final int defaultTotalCost=0x7f05000c;
         public static final int hello_world=0x7f050002;
         public static final int sub=0x7f050008;
         public static final int tip_amount=0x7f050005;

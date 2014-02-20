@@ -59,10 +59,10 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 	
 	private void setAllViews() {
 		//TODO set all TextView's, then call from all modifiers
-		tipValue.setText("£" + tipAmount);
+		tipValue.setText("Tip: £" + tipAmount);
 		displayPeople.setText(people+"");
-		totalCostView.setText("£" + totalCost);
-		costPerPerson.setText("£" + costPP);
+		totalCostView.setText("Total Cost: £" + totalCost);
+		costPerPerson.setText("Cost Each: £" + costPP);
 	}
 	
 	private void calcTipAmount() {

@@ -13,6 +13,7 @@
     <string name="defaultPeople">1</string>
     <string name="billRequest">Bill Value:</string>
     <string name="costEach">Cost per person:</string>
-    <string name="defaultCost">£0</string>
+    <string name="defaultTotalCost">Total Cost: £0</string>
+    <string name="defaultCostEach">Cost Each: £0</string>
 
 </resources>
