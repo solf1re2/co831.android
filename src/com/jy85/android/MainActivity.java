@@ -19,12 +19,12 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 	private TextView costPerPerson;
 	
 
-	private int tipPercentage;
-	private int tipAmount;
-	private int billAmount;
-	private int totalCost;
+	private double tipPercentage;
+	private double tipAmount;
+	private double billAmount;
+	private double totalCost;
 	private int people;
-	private int costPP;
+	private double costPP;
 	
 
 	@Override
@@ -96,6 +96,9 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 			setAllViews();
 			} 
 			break;
+		case R.id.bRnd:
+			
+			break;
 		}
 	}//TODO on change of people/percentage/billValue; update the costPerPerson.
 
@@ -111,7 +114,7 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 			boolean fromUser) {
 		textPercentage.setText(progress + "%");
 		tipPercentage = progress;
-		billAmount = Integer.valueOf(billValue.getText().toString());
+		billAmount = Double.valueOf(billValue.getText().toString());
 		calcTipAmount();
 		calcTotalCost();
 		calcCostPerPerson();

@@ -9,16 +9,6 @@
     tools:context=".MainActivity" >
 
     <TextView
-        android:id="@+id/Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/title"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
         android:id="@+id/textViewPercentage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,8 +45,8 @@
         android:layout_alignBaseline="@+id/peopleDisplay"
         android:layout_alignBottom="@+id/peopleDisplay"
         android:layout_toRightOf="@+id/Title"
-        android:text="@string/add" 
-    	android:onClick="onClickBtn" />
+        android:onClick="onClickBtn"
+        android:text="@string/add" />
 
     <Button
         android:id="@+id/bSub"
@@ -66,8 +56,8 @@
         android:layout_alignBaseline="@+id/peopleDisplay"
         android:layout_alignBottom="@+id/peopleDisplay"
         android:layout_toLeftOf="@+id/Title"
-        android:text="@string/sub" 
-    	android:onClick="onClickBtn" />
+        android:onClick="onClickBtn"
+        android:text="@string/sub" />
 
     <EditText
         android:id="@+id/billValue"
@@ -90,19 +80,10 @@
         android:layout_marginTop="60dp" />
 
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/costPerPerson"
-        android:layout_centerHorizontal="true"
-        android:text="@string/costEach"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
         android:id="@+id/totalCostV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView1"
+        android:layout_above="@+id/costPerPerson"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="14dp"
         android:text="@string/defaultTotalCost"
@@ -116,6 +97,25 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="56dp"
         android:text="@string/defaultCostEach"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/bRnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/rounder"
+        android:onClick="onCLickBtn" />
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:text="@string/title"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
