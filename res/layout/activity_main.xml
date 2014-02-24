@@ -19,15 +19,6 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/textViewTipValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/tip_amount"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
         android:id="@+id/peopleDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,16 +28,38 @@
         android:text="@string/defaultPeople"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/bAdd"
-        style="?android:attr/buttonStyleSmall"
+    <ToggleButton
+        android:id="@+id/rndToggle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/peopleDisplay"
-        android:layout_alignBottom="@+id/peopleDisplay"
-        android:layout_toRightOf="@+id/Title"
-        android:onClick="onClickBtn"
-        android:text="@string/add" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="onToggleClicked"
+        android:text="@string/rounder" />
+
+    <EditText
+        android:id="@+id/billValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:ems="10"
+        android:hint="@string/billPrompt"
+        android:inputType="numberDecimal" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textViewTipValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/rndToggle"
+        android:layout_below="@+id/billValue"
+        android:layout_marginTop="46dp"
+        android:text="@string/tip_amount"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
         android:id="@+id/bSub"
@@ -55,37 +68,27 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/peopleDisplay"
         android:layout_alignBottom="@+id/peopleDisplay"
-        android:layout_toLeftOf="@+id/Title"
+        android:layout_toLeftOf="@+id/rndToggle"
         android:onClick="onClickBtn"
         android:text="@string/sub" />
 
-    <EditText
-        android:id="@+id/billValue"
+    <Button
+        android:id="@+id/bAdd"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textViewPercentage"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:inputType="number" >
-
-        <requestFocus />
-    </EditText>
-
-    <SeekBar
-        android:id="@+id/seekBar1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp" />
+        android:layout_alignBaseline="@+id/peopleDisplay"
+        android:layout_alignBottom="@+id/peopleDisplay"
+        android:layout_toRightOf="@+id/textViewTipValue"
+        android:onClick="onClickBtn"
+        android:text="@string/add" />
 
     <TextView
         android:id="@+id/totalCostV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/costPerPerson"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="14dp"
+        android:layout_centerVertical="true"
         android:text="@string/defaultTotalCost"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -93,29 +96,18 @@
         android:id="@+id/costPerPerson"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/totalCostV"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="56dp"
         android:text="@string/defaultCostEach"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Button
-        android:id="@+id/bRnd"
-        android:layout_width="wrap_content"
+    <SeekBar
+        android:id="@+id/seekBar1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/rndToggle"
         android:layout_centerHorizontal="true"
-        android:text="@string/rounder"
-        android:onClick="onCLickBtn" />
-
-    <TextView
-        android:id="@+id/Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        android:text="@string/title"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginBottom="37dp"
+        android:max="40" />
 
 </RelativeLayout>

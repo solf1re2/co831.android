@@ -16,5 +16,6 @@
     <string name="defaultTotalCost">Total Cost: £0</string>
     <string name="defaultCostEach">Cost Each: £0</string>
     <string name="rounder">Round</string>
+    <string name="billPrompt">Enter Bill Amount Here:</string>
 
 </resources>
