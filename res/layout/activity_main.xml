@@ -18,16 +18,6 @@
         android:text="@string/view_percentage"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/peopleDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewTipValue"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
-        android:text="@string/defaultPeople"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
     <ToggleButton
         android:id="@+id/rndToggle"
         android:layout_width="wrap_content"
@@ -37,28 +27,62 @@
         android:onClick="onToggleClicked"
         android:text="@string/rounder" />
 
+    <TextView
+        android:id="@+id/totalCostV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/costPerPerson"
+        android:text="@string/defaultTotalCost"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <EditText
         android:id="@+id/billValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="38dp"
         android:ems="10"
         android:hint="@string/billPrompt"
-        android:inputType="numberDecimal" >
-
-        <requestFocus />
-    </EditText>
+        android:inputType="numberDecimal" />
 
     <TextView
         android:id="@+id/textViewTipValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/rndToggle"
-        android:layout_below="@+id/billValue"
-        android:layout_marginTop="46dp"
+        android:layout_above="@+id/totalCostV"
+        android:layout_centerHorizontal="true"
         android:text="@string/tip_amount"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <SeekBar
+        android:id="@+id/seekBar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rndToggle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="28dp"
+        android:max="40" />
+
+    <TextView
+        android:id="@+id/peopleDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/bSub"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/defaultPeople"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/costPerPerson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bAdd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="54dp"
+        android:text="@string/defaultCostEach"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
@@ -66,8 +90,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/peopleDisplay"
-        android:layout_alignBottom="@+id/peopleDisplay"
+        android:layout_above="@+id/seekBar1"
         android:layout_toLeftOf="@+id/rndToggle"
         android:onClick="onClickBtn"
         android:text="@string/sub" />
@@ -77,37 +100,17 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/peopleDisplay"
-        android:layout_alignBottom="@+id/peopleDisplay"
-        android:layout_toRightOf="@+id/textViewTipValue"
+        android:layout_above="@+id/seekBar1"
+        android:layout_toRightOf="@+id/rndToggle"
         android:onClick="onClickBtn"
         android:text="@string/add" />
 
     <TextView
-        android:id="@+id/totalCostV"
+        android:id="@+id/peoplePrompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/peopleDisplay"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/defaultTotalCost"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/costPerPerson"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/totalCostV"
-        android:layout_centerHorizontal="true"
-        android:text="@string/defaultCostEach"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <SeekBar
-        android:id="@+id/seekBar1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/rndToggle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="37dp"
-        android:max="40" />
+        android:text="@string/peoplePrompt" />
 
 </RelativeLayout>

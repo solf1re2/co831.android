@@ -1,6 +1,6 @@
 package com.jy85.android;
 
-import java.text.NumberFormat;
+//import java.text.NumberFormat;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -25,19 +25,20 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 	private TextView costPerPerson;
 	
 
-	private double tipPercentage;
-	private double tipAmount;
-	private double billAmount;
-	private double totalCost;
+	private int tipPercentage;
+	private int tipAmount;
+	private int billAmount;
+	private int totalCost;
 	private int people;
-	private double costPP;
-	private double costPPRound;
+	private int costPP;
+	private int costPPRound;
 	private boolean rounderOn;
 	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		SharedPreferences preferences = getPreferences(MODE_PRIVATE);
 		setContentView(R.layout.activity_main);
 		people = 1;
 		billAmount = 0;
@@ -48,10 +49,9 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 		rounderOn = false;
 		bar = (SeekBar) findViewById(R.id.seekBar1);
 		bar.setOnSeekBarChangeListener(this);
+//		bar.setProgress(preferences.getInt("percentage",tipPercentage));
 		billValue = (EditText) findViewById(R.id.billValue);
 		billValue.addTextChangedListener(mTextEditorWatcher);
-		
-		//billValue.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 		textPercentage = (TextView) findViewById(R.id.textViewPercentage);
 		tipValue = (TextView) findViewById(R.id.textViewTipValue);
 		displayPeople = (TextView) findViewById(R.id.peopleDisplay);
@@ -77,7 +77,7 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 	  // Store values between instances here
 	  SharedPreferences preferences = getPreferences(MODE_PRIVATE);
 	  SharedPreferences.Editor editor = preferences.edit();  // Put the values from the UI
-	  
+	  editor.putInt("percentage", tipPercentage);
 	  // Commit to storage
 	  editor.commit();
 	}
@@ -86,60 +86,77 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 
 		   public void beforeTextChanged(CharSequence s, int start, int count, int after)
 		   {
-			   // When No Password Entered
-			   
 		   }
 
 		   public void onTextChanged(CharSequence s, int start, int before, int count)
 		   {
-
 		   }
 
 		   public void afterTextChanged(Editable s)
 		   {
-			   billAmount = Double.valueOf(billValue.getText().toString());
-			   calcTipAmount();
-				calcTotalCost();
-				calcCostPerPerson();
-				setAllViews();
+			   double bill = Double.valueOf(billValue.getText().toString());
+			   billAmount = (int) (100*bill);
+//			   calcTipAmount();
+//			   calcTotalCost();
+//			   calcCostPerPerson();
+//			   calcRoundCostPP();
+			   setAllViews();
 		   }
 	   };	
 	
 	private void setAllViews() {
-		//TODO set all TextView's, then call from all modifiers
-		tipValue.setText("Tip: £" + dFormatter(tipAmount));
+		tipValue.setText("Tip: £" + calcTipAmount());
 		displayPeople.setText(people+"");
-		totalCostView.setText("Total Cost: £" + dFormatter(totalCost));
+		totalCostView.setText("Total Cost: £" + calcTotalCost());
 		if (rounderOn){
-			costPerPerson.setText("Cost Each: £" + dFormatter(costPPRound));
+			costPerPerson.setText("Cost Each: £" + calcRoundCostPP());
 		}else {
-			costPerPerson.setText("Cost Each: £" + dFormatter(costPP));
+			costPerPerson.setText("Cost Each: £" + calcCostPerPerson());
 		}
 	}
 	
-	private void calcTipAmount() {
+	private double calcTipAmount() {
 		tipAmount = billAmount*tipPercentage/100;
+		double tipAmountD = (double)tipAmount/100;
+		System.out.println("tip = " +tipAmount);//variable checks
+		return tipAmountD;
 	}
 	
-	private void calcTotalCost() {
-		totalCost = billAmount + tipAmount;
+	private double calcTotalCost() {
+		totalCost = (billAmount + tipAmount);
+		double totalCostD = (double)totalCost/100;
+		System.out.println("total = " + totalCost);//variable checks
+		return totalCostD;
 	}
 	
-	private void calcCostPerPerson() {
+	private double calcCostPerPerson() {
 		costPP = totalCost / people;
-		double pence = costPP%1;
-		if (pence < 0.50) {
+		double costPPD = (double)costPP/100;
+		System.out.println("CostPP = " + costPP);//variable checks
+		return costPPD;
+	}
+	
+	private double calcRoundCostPP() {
+		int pence = costPP%100;
+		double costPPRoundD;
+		System.out.println("pence = " + pence); //variable checks
+		if (pence < 50) {
 			//round down
 			if (((costPP - pence) * people) > billAmount){
 				costPPRound = costPP - pence;
+				costPPRoundD = costPPRound/100;
 			} else {
-				costPPRound = costPP + (1 - pence);
+				costPPRound = costPP + (100 - pence);
+				costPPRoundD = costPPRound/100;
 			}
 		} else {
 			//round up
-			costPPRound = costPP + (1 - pence);
+			costPPRound = costPP + (100 - pence);
+			costPPRoundD = costPPRound/100;
 		}
+		return costPPRoundD;
 	}
+	
 	/**
 	 * Calculates the tip value based on the bill cost entered and percentage
 	 * selected.
@@ -148,20 +165,22 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 		switch (v.getId()){
 		case R.id.bAdd:
 			people ++;
-			calcTotalCost();
-			calcCostPerPerson();
+//			calcTotalCost();
+//			calcCostPerPerson();
+//			calcRoundCostPP();
 			setAllViews();
 			break;
 		case R.id.bSub:
 			if (people>=2){
 			people --;
-			calcTotalCost();
-			calcCostPerPerson();
+//			calcTotalCost();
+//			calcCostPerPerson();
+//			calcRoundCostPP();
 			setAllViews();
 			} 
 			break;
 		}
-	}//TODO on change of people/percentage/billValue; update the costPerPerson.
+	}
 	
 	public void onToggleClicked(View view) {
 	    // Is the toggle on?
@@ -181,13 +200,14 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 		textPercentage.setText(progress + "%");
 		tipPercentage = progress;
 		
-		if (billAmount!=0) {
-			billAmount = Double.valueOf(billValue.getText().toString());
-			calcTipAmount();
-			calcTotalCost();
-			calcCostPerPerson();
+//		if (billAmount!=0) {
+//			billAmount = Integer.valueOf(billValue.getText().toString());
+//			calcTipAmount();
+//			calcTotalCost();
+//			calcCostPerPerson();
+//			calcRoundCostPP();
 			setAllViews();
-		}
+//		}
 	}
 
 	@Override
@@ -199,11 +219,11 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 		seekBar.setSecondaryProgress(seekBar.getProgress());
 	}
 	
-	private String dFormatter(double number) {
-		NumberFormat format = NumberFormat.getNumberInstance();
-		format.setMinimumFractionDigits(2);
-		format.setMaximumFractionDigits(2);
-		String output = format.format(number);
-		return output;
-	}
+//	private String dFormatter(double number) {
+//		NumberFormat format = NumberFormat.getNumberInstance();
+//		format.setMinimumFractionDigits(2);
+//		format.setMaximumFractionDigits(2);
+//		String output = format.format(number);
+//		return output;
+//	}
 }
