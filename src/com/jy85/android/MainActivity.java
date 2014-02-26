@@ -1,6 +1,6 @@
 package com.jy85.android;
 
-//import java.text.NumberFormat;
+import java.text.NumberFormat;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -49,7 +49,9 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 		rounderOn = false;
 		bar = (SeekBar) findViewById(R.id.seekBar1);
 		bar.setOnSeekBarChangeListener(this);
-//		bar.setProgress(preferences.getInt("percentage",tipPercentage));
+//		if(preferences.contains("percentage")) {
+//			bar.setProgress(preferences.getInt("percentage",0));
+//		}
 		billValue = (EditText) findViewById(R.id.billValue);
 		billValue.addTextChangedListener(mTextEditorWatcher);
 		textPercentage = (TextView) findViewById(R.id.textViewPercentage);
@@ -105,13 +107,13 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 	   };	
 	
 	private void setAllViews() {
-		tipValue.setText("Tip: £" + calcTipAmount());
+		tipValue.setText("Tip: £" + dFormatter(calcTipAmount()));
 		displayPeople.setText(people+"");
-		totalCostView.setText("Total Cost: £" + calcTotalCost());
+		totalCostView.setText("Total Cost: £" + dFormatter(calcTotalCost()));
 		if (rounderOn){
-			costPerPerson.setText("Cost Each: £" + calcRoundCostPP());
+			costPerPerson.setText("Cost Each: £" + dFormatter(calcRoundCostPP()));
 		}else {
-			costPerPerson.setText("Cost Each: £" + calcCostPerPerson());
+			costPerPerson.setText("Cost Each: £" + dFormatter(calcCostPerPerson()));
 		}
 	}
 	
@@ -136,6 +138,7 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 		return costPPD;
 	}
 	
+	//TODO switch statement- >100 round to 10; >500 round 50; <1000 round to 1000.
 	private double calcRoundCostPP() {
 		int pence = costPP%100;
 		double costPPRoundD;
@@ -219,11 +222,11 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 		seekBar.setSecondaryProgress(seekBar.getProgress());
 	}
 	
-//	private String dFormatter(double number) {
-//		NumberFormat format = NumberFormat.getNumberInstance();
-//		format.setMinimumFractionDigits(2);
-//		format.setMaximumFractionDigits(2);
-//		String output = format.format(number);
-//		return output;
-//	}
+	private String dFormatter(double number) {
+		NumberFormat format = NumberFormat.getNumberInstance();
+		format.setMinimumFractionDigits(2);
+		format.setMaximumFractionDigits(2);
+		String output = format.format(number);
+		return output;
+	}
 }
