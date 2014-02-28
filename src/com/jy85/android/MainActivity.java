@@ -49,11 +49,9 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 		totalCost = 0;
 		costPP = 0;
 		rounderOn = false;
+		
 		bar = (SeekBar) findViewById(R.id.seekBar1);
 		bar.setOnSeekBarChangeListener(this);
-
-		//			tipPercentage = savedInstanceState.getInt("percentage");
-		//			bar.setProgress(tipPercentage);
 		billValue = (EditText) findViewById(R.id.billValue);
 		billValue.addTextChangedListener(mTextEditorWatcher);
 		textPercentage = (TextView) findViewById(R.id.textViewPercentage);
@@ -65,37 +63,37 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 		SharedPreferences settings = getSharedPreferences("Tipster", 0);
 		tipPercentage = settings.getInt("percentage", 0);
 		bar.setProgress((int)tipPercentage);
-		textPercentage.setText("" + tipPercentage + " %");
+		textPercentage.setText("Percentage Tip " + tipPercentage + " %");
+
+		//input filter obtained from gist.github.com/gaara87/3607765
+		billValue.setFilters(new InputFilter[] {
+				new DigitsKeyListener(Boolean.FALSE, Boolean.TRUE) {
+					int beforeDecimal = 6, afterDecimal = 2;
+
+					@Override
+					public CharSequence filter(CharSequence source, int start, int end,
+							Spanned dest, int dstart, int dend) {
+						String temp = billValue.getText() + source.toString();
+
+						if (temp.equals(".")) {
+							return "0.";
+						}
+						else if (temp.toString().indexOf(".") == -1) {
+							// no decimal point placed yet
+							if (temp.length() > beforeDecimal) {
+								return "";
+							}
+						} else {
+							temp = temp.substring(temp.indexOf(".") + 1);
+							if (temp.length() > afterDecimal) {
+								return "";
+							}
+						}
+						return super.filter(source, start, end, dest, dstart, dend);
+					}
+				}
+		});
 		
-		 
-	        billValue.setFilters(new InputFilter[] {
-	                new DigitsKeyListener(Boolean.FALSE, Boolean.TRUE) {
-	                    int beforeDecimal = 5, afterDecimal = 2;
-	 
-	                    @Override
-	                    public CharSequence filter(CharSequence source, int start, int end,
-	                            Spanned dest, int dstart, int dend) {
-	                        String temp = billValue.getText() + source.toString();
-	 
-	                        if (temp.equals(".")) {
-	                            return "0.";
-	                        }
-	                        else if (temp.toString().indexOf(".") == -1) {
-	                            // no decimal point placed yet
-	                            if (temp.length() > beforeDecimal) {
-	                                return "";
-	                            }
-	                        } else {
-	                            temp = temp.substring(temp.indexOf(".") + 1);
-	                            if (temp.length() > afterDecimal) {
-	                                return "";
-	                            }
-	                        }
-	 
-	                        return super.filter(source, start, end, dest, dstart, dend);
-	                    }
-	                }
-	        });
 	}
 
 	@Override
@@ -265,6 +263,7 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 
 	public void onToggleClicked(View view) {
 		// Is the toggle on?
+		
 		rounderOn = ((ToggleButton) view).isChecked();
 		setAllViews();
 	}
@@ -278,7 +277,7 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 	public void onProgressChanged(SeekBar seekBar, int progress,
 			boolean fromUser) {
 		tipPercentage = progress;
-		textPercentage.setText(tipPercentage + "%");
+		textPercentage.setText("Percentage Tip " + tipPercentage + "%");
 		setAllViews();
 	}
 

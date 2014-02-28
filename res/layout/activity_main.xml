@@ -25,16 +25,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:onClick="onToggleClicked"
-        android:text="@string/rounder" />
-
-    <TextView
-        android:id="@+id/totalCostV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/costPerPerson"
-        android:text="@string/defaultTotalCost"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textOff="@string/rounder"
+        android:textOn="@string/rounder"
+         />
 
     <EditText
         android:id="@+id/billValue"
@@ -46,15 +39,6 @@
         android:ems="10"
         android:hint="@string/billPrompt"
         android:inputType="numberDecimal" />
-
-    <TextView
-        android:id="@+id/textViewTipValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/totalCostV"
-        android:layout_centerHorizontal="true"
-        android:text="@string/tip_amount"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <SeekBar
         android:id="@+id/seekBar1"
@@ -112,5 +96,25 @@
         android:layout_above="@+id/peopleDisplay"
         android:layout_centerHorizontal="true"
         android:text="@string/peoplePrompt" />
+
+    <TextView
+        android:id="@+id/textViewTipValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/totalCostV"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="17dp"
+        android:text="@string/tip_amount"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/totalCostV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/costPerPerson"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp"
+        android:text="@string/defaultTotalCost"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
