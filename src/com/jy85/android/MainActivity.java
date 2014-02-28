@@ -6,7 +6,9 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -14,6 +16,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+import android.text.Spanned;
 
 public class MainActivity extends Activity implements OnSeekBarChangeListener {
 
@@ -63,6 +66,36 @@ public class MainActivity extends Activity implements OnSeekBarChangeListener {
 		tipPercentage = settings.getInt("percentage", 0);
 		bar.setProgress((int)tipPercentage);
 		textPercentage.setText("" + tipPercentage + " %");
+		
+		 
+	        billValue.setFilters(new InputFilter[] {
+	                new DigitsKeyListener(Boolean.FALSE, Boolean.TRUE) {
+	                    int beforeDecimal = 5, afterDecimal = 2;
+	 
+	                    @Override
+	                    public CharSequence filter(CharSequence source, int start, int end,
+	                            Spanned dest, int dstart, int dend) {
+	                        String temp = billValue.getText() + source.toString();
+	 
+	                        if (temp.equals(".")) {
+	                            return "0.";
+	                        }
+	                        else if (temp.toString().indexOf(".") == -1) {
+	                            // no decimal point placed yet
+	                            if (temp.length() > beforeDecimal) {
+	                                return "";
+	                            }
+	                        } else {
+	                            temp = temp.substring(temp.indexOf(".") + 1);
+	                            if (temp.length() > afterDecimal) {
+	                                return "";
+	                            }
+	                        }
+	 
+	                        return super.filter(source, start, end, dest, dstart, dend);
+	                    }
+	                }
+	        });
 	}
 
 	@Override
